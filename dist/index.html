@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f5eee9" />
+  <meta name="description" content="十一旅行预算与消费记账，清楚掌握每一笔花费。" />
+  <title>十一旅行账本</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23dbe8e0'/%3E%3Cpath d='M17 40c8-2 13-8 19-19 3-6 8-6 10-3s0 7-4 10L25 42l-7 1z' fill='%23f5c9cf' stroke='%23544d4b' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='m32 29-9-7m10 9 1 11' stroke='%23544d4b' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --ink:#33302f; --muted:#7b7471; --paper:#fbf8f5; --cream:#f4eee9;
+      --pink:#efc6cc; --pink-deep:#bc747e; --blue:#cbdde7; --blue-deep:#6f8d9c;
+      --green:#cdded2; --green-deep:#66806f; --yellow:#eee1b7; --white:#fffdfb;
+      --shadow:0 18px 44px rgba(77,64,59,.10); --soft-shadow:0 8px 22px rgba(77,64,59,.08);
+      --radius:26px;
+    }
+    *{box-sizing:border-box}
+    html{background:#e9e2dc}
+    body{margin:0;color:var(--ink);font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;background:
+      radial-gradient(circle at 10% 5%,rgba(239,198,204,.46),transparent 28%),
+      radial-gradient(circle at 92% 24%,rgba(203,221,231,.55),transparent 30%),
+      linear-gradient(145deg,#f5eee9,#edf3ef 75%);min-height:100vh}
+    button,input,select{font:inherit}
+    button{color:inherit}
+    .app{width:min(100%,1180px);margin:0 auto;min-height:100vh;padding:28px 28px 88px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-mark{width:42px;height:42px;border-radius:15px;background:var(--green);display:grid;place-items:center;box-shadow:var(--soft-shadow);font-size:21px;transform:rotate(-4deg)}
+    .eyebrow{font:600 12px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:var(--pink-deep);text-transform:uppercase;margin:0 0 5px}
+    h1{font-family:"Songti SC","STSong",serif;font-size:24px;line-height:1.2;margin:0;font-weight:700;letter-spacing:.02em}
+    .trip-pill{display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(76,65,61,.08);border-radius:999px;background:rgba(255,253,251,.72);font-size:14px;color:var(--muted);backdrop-filter:blur(12px)}
+    .hero{position:relative;overflow:hidden;border-radius:32px;min-height:220px;background:var(--white);box-shadow:var(--shadow);isolation:isolate}
+    .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,253,251,.98) 0%,rgba(255,253,251,.92) 37%,rgba(255,253,251,.05) 77%);z-index:-1}
+    .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+    .hero-copy{padding:30px;max-width:560px}
+    .date-stamp{display:inline-flex;align-items:center;gap:7px;color:var(--green-deep);font-size:14px;font-weight:650;margin-bottom:16px}
+    .date-stamp:before{content:"";width:22px;height:1.5px;background:currentColor}
+    .hero h2{font-family:"Songti SC","STSong",serif;font-size:34px;line-height:1.15;margin:0 0 12px;letter-spacing:.01em}
+    .hero p{margin:0;color:var(--muted);font-size:15px;line-height:1.8;max-width:32em}
+    .grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);gap:22px;margin-top:22px}
+    .panel{background:rgba(255,253,251,.86);border:1px solid rgba(76,65,61,.06);border-radius:var(--radius);box-shadow:var(--soft-shadow);backdrop-filter:blur(14px)}
+    .budget-card{padding:26px;position:relative;overflow:hidden}
+    .budget-card:before{content:"";position:absolute;width:160px;height:160px;border-radius:50%;right:-65px;top:-65px;background:rgba(203,221,231,.5)}
+    .section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:22px}
+    .section-head h3{margin:0;font:700 20px/1.35 "Songti SC","STSong",serif}
+    .section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}
+    .ghost-btn{border:0;background:transparent;padding:4px 0;color:var(--blue-deep);font-size:13px;font-weight:650;cursor:pointer}
+    .amount{font-family:ui-rounded,"SF Pro Rounded",system-ui,sans-serif;font-size:44px;font-weight:750;letter-spacing:-.035em;margin:4px 0 8px}
+    .amount small{font-size:20px;vertical-align:9px;margin-right:4px;font-weight:650}
+    .budget-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:12px}
+    .progress{height:12px;background:#ece7e2;border-radius:99px;overflow:hidden;padding:2px}
+    .progress span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green-deep),var(--blue-deep));transition:width .4s ease}
+    .budget-note{display:flex;align-items:center;gap:9px;margin-top:16px;color:var(--green-deep);font-size:14px;font-weight:600}
+    .budget-note.warn{color:#b45d66}
+    .dot{width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 0 5px color-mix(in srgb,currentColor 15%,transparent)}
+    .category-panel{padding:26px}
+    .category-row{display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:13px;padding:11px 0}
+    .cat-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;font-size:19px}
+    .cat-top{display:flex;justify-content:space-between;gap:10px;font-size:14px;margin-bottom:7px}
+    .cat-top strong{font-weight:650}.cat-top span{font-variant-numeric:tabular-nums}
+    .cat-bar{height:6px;border-radius:99px;background:#eeeae6;overflow:hidden}.cat-bar i{display:block;height:100%;border-radius:inherit}
+    .cat-percent{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);width:34px;text-align:right}
+    .records{grid-column:1/-1;padding:26px}
+    .records-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:18px}
+    .records h3{margin:0 0 5px;font:700 20px/1.35 "Songti SC","STSong",serif}.records-sub{margin:0;color:var(--muted);font-size:13px}
+    .filters{display:flex;gap:7px;overflow:auto;padding:2px 2px 12px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}
+    .filter{white-space:nowrap;border:1px solid #e6dfda;background:transparent;border-radius:99px;padding:8px 13px;font-size:13px;cursor:pointer;transition:.2s}
+    .filter.active{background:var(--ink);border-color:var(--ink);color:white}
+    .record-list{display:grid;gap:8px}
+    .record{display:grid;grid-template-columns:48px minmax(0,1fr) auto auto;align-items:center;gap:14px;padding:13px;border-radius:18px;transition:.2s}
+    .record:hover{background:#f6f1ed}.record-icon{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;font-size:20px}
+    .record-title{font-size:15px;font-weight:650;margin-bottom:4px}.record-meta{font-size:12px;color:var(--muted)}
+    .record-price{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right}.record-price small{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-top:3px}
+    .delete-btn{opacity:0;border:0;background:transparent;color:#a78f8a;cursor:pointer;padding:8px;border-radius:9px}.record:hover .delete-btn,.delete-btn:focus{opacity:1}
+    .empty{text-align:center;padding:42px 12px;color:var(--muted);font-size:14px}
+    .fab{position:fixed;z-index:10;right:max(24px,calc((100vw - 1180px)/2 + 28px));bottom:26px;border:0;border-radius:20px;background:var(--ink);color:white;padding:15px 20px;box-shadow:0 14px 30px rgba(46,42,40,.28);display:flex;align-items:center;gap:9px;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s}.fab:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(46,42,40,.32)}
+    dialog{border:0;padding:0;border-radius:28px;width:min(92vw,470px);background:var(--paper);color:var(--ink);box-shadow:0 28px 80px rgba(50,43,40,.28)}
+    dialog::backdrop{background:rgba(48,43,40,.36);backdrop-filter:blur(5px)}
+    .modal{padding:27px}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.modal-head h3{font:700 22px/1.3 "Songti SC","STSong",serif;margin:0}.close{border:0;width:36px;height:36px;border-radius:50%;background:#eee8e3;cursor:pointer;font-size:18px}
+    .field{margin-bottom:16px}.field label{display:block;font-size:13px;font-weight:650;margin-bottom:8px}.field input,.field select{width:100%;border:1px solid #ded5cf;background:white;border-radius:14px;padding:13px 14px;color:var(--ink);outline:none;font-size:16px}.field input:focus,.field select:focus{border-color:var(--blue-deep);box-shadow:0 0 0 3px rgba(111,141,156,.12)}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.submit{width:100%;border:0;border-radius:16px;background:var(--ink);color:white;padding:14px;font-weight:700;cursor:pointer;margin-top:4px}
+    .toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,20px);background:var(--ink);color:white;padding:11px 17px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:30}.toast.show{opacity:1;transform:translate(-50%,0)}
+    .budget-pop{position:absolute;right:24px;top:62px;z-index:4;width:235px;background:white;border-radius:18px;box-shadow:var(--shadow);padding:15px;display:none}.budget-pop.open{display:block}.budget-pop label{font-size:12px;font-weight:650;display:block;margin-bottom:7px}.budget-pop .row{display:flex;gap:8px}.budget-pop input{min-width:0;width:100%;border:1px solid #ded5cf;border-radius:11px;padding:9px}.budget-pop button{border:0;border-radius:11px;background:var(--ink);color:white;padding:0 12px;cursor:pointer}
+    @media(max-width:780px){body{background:var(--cream)}.app{padding:18px 16px 100px}.topbar{margin-bottom:16px}.trip-pill{display:none}.hero{min-height:240px;border-radius:27px}.hero-bg{object-position:58% center}.hero:after{background:linear-gradient(90deg,rgba(255,253,251,.98),rgba(255,253,251,.80) 57%,rgba(255,253,251,.06))}.hero-copy{padding:25px 22px;max-width:84%}.hero h2{font-size:29px}.hero p{font-size:14px;line-height:1.65}.grid{grid-template-columns:1fr;gap:15px;margin-top:15px}.panel,.records{border-radius:23px}.budget-card,.category-panel,.records{padding:21px}.records{grid-column:auto}.records-top{display:block}.filters{margin-top:14px}.record{grid-template-columns:44px minmax(0,1fr) auto;padding:10px 4px;gap:11px}.record-icon{width:44px;height:44px}.delete-btn{display:none}.amount{font-size:40px}.fab{right:18px;bottom:18px}.two{grid-template-columns:1fr}.budget-pop{right:18px;top:58px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark" aria-hidden="true">✈</div><div><p class="eyebrow">TRIP NOTES · 2026</p><h1>十一旅行账本</h1></div></div>
+      <div class="trip-pill">📍 杭州 · 10月1日—5日</div>
+    </header>
+
+    <section class="hero" aria-label="本次旅行">
+      <img class="hero-bg" src="assets/travel-journal.png" alt="粉蓝绿旅行手账、地图与拍立得照片" />
+      <div class="hero-copy">
+        <div class="date-stamp">5天 4夜 · 国庆小旅行</div>
+        <h2>把钱花在<br>值得记住的风景里</h2>
+        <p>每一笔都记清楚，既不委屈旅行，也不让假期后的自己吃土。</p>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="panel budget-card" aria-labelledby="budgetTitle">
+        <div class="section-head"><div><h3 id="budgetTitle">预算还剩</h3><p>实时跟着每一笔消费变化</p></div><button class="ghost-btn" id="editBudget">调整预算</button></div>
+        <div class="budget-pop" id="budgetPop"><label for="budgetInput">总预算（元）</label><div class="row"><input id="budgetInput" inputmode="decimal" type="number" min="1" /><button id="saveBudget">保存</button></div></div>
+        <div class="amount"><small>¥</small><span id="remaining">0</span></div>
+        <div class="budget-meta"><span>已花 <b id="spent">¥0</b></span><span>总预算 <b id="totalBudget">¥0</b></span></div>
+        <div class="progress" role="progressbar" aria-label="预算使用比例" aria-valuemin="0" aria-valuemax="100"><span id="progressBar"></span></div>
+        <div class="budget-note" id="budgetNote"><span class="dot"></span><span>预算节奏刚刚好，继续保持</span></div>
+      </section>
+
+      <section class="panel category-panel" aria-labelledby="categoryTitle">
+        <div class="section-head"><div><h3 id="categoryTitle">钱都花在哪儿</h3><p>按旅行事项看得明明白白</p></div></div>
+        <div id="categoryList"></div>
+      </section>
+
+      <section class="panel records" aria-labelledby="recordsTitle">
+        <div class="records-top"><div><h3 id="recordsTitle">旅行明细</h3><p class="records-sub"><span id="recordCount">0</span> 笔消费 · 最近记录在最上面</p></div></div>
+        <div class="filters" id="filters" aria-label="消费分类筛选"></div>
+        <div class="record-list" id="recordList"></div>
+      </section>
+    </div>
+  </main>
+
+  <button class="fab" id="addBtn"><span aria-hidden="true">＋</span> 记一笔</button>
+
+  <dialog id="entryDialog">
+    <form class="modal" id="entryForm">
+      <div class="modal-head"><h3>今天花了什么？</h3><button type="button" class="close" id="closeDialog" aria-label="关闭">×</button></div>
+      <div class="field"><label for="title">消费事项</label><input id="title" name="title" placeholder="例如：西湖边的午餐" autocomplete="off" required /></div>
+      <div class="two">
+        <div class="field"><label for="amount">金额（元）</label><input id="amount" name="amount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00" required /></div>
+        <div class="field"><label for="category">分类</label><select id="category" name="category"></select></div>
+      </div>
+      <div class="field"><label for="date">日期</label><input id="date" name="date" type="date" required /></div>
+      <button class="submit" type="submit">保存这一笔</button>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite">已经记进旅行账本啦</div>
+
+  <script>
+    const categories = {
+      transport:{label:'行程交通',icon:'✈️',color:'#c8dce7',bar:'#7f9fad'},
+      hotel:{label:'酒店住宿',icon:'🛏️',color:'#efd0d4',bar:'#bc7d86'},
+      ticket:{label:'景点门票',icon:'🎫',color:'#d1e0d5',bar:'#76907d'},
+      food:{label:'吃吃喝喝',icon:'🍜',color:'#eee1b7',bar:'#b59b57'},
+      taxi:{label:'短途打车',icon:'🚕',color:'#ddd6ea',bar:'#8b7aa2'},
+      other:{label:'其他',icon:'🧺',color:'#e5ddd7',bar:'#95847b'}
+    };
+    const seed = [
+      {id:1,title:'上海 → 杭州高铁',amount:328,category:'transport',date:'2026-10-01'},
+      {id:2,title:'湖滨精品酒店 · 2晚',amount:1280,category:'hotel',date:'2026-10-01'},
+      {id:3,title:'灵隐寺门票',amount:75,category:'ticket',date:'2026-10-02'},
+      {id:4,title:'龙井茶园午餐',amount:186,category:'food',date:'2026-10-02'},
+      {id:5,title:'酒店 → 西湖打车',amount:34,category:'taxi',date:'2026-10-02'},
+      {id:6,title:'西溪湿地船票',amount:120,category:'ticket',date:'2026-10-03'}
+    ];
+    let budget = Number(localStorage.getItem('trip-budget')) || 5000;
+    let records = JSON.parse(localStorage.getItem('trip-records') || 'null') || seed;
+    let activeFilter = 'all';
+    const money = n => '¥' + Number(n).toLocaleString('zh-CN',{minimumFractionDigits:Number(n)%1?2:0,maximumFractionDigits:2});
+    const dateText = d => { const x = new Date(d+'T12:00:00'); return `${x.getMonth()+1}月${x.getDate()}日`; };
+    function persist(){ localStorage.setItem('trip-budget',budget); localStorage.setItem('trip-records',JSON.stringify(records)); }
+    function render(){
+      const spent = records.reduce((s,r)=>s+Number(r.amount),0), remaining=budget-spent, ratio=budget?spent/budget*100:0;
+      document.getElementById('remaining').textContent=Math.abs(remaining).toLocaleString('zh-CN',{maximumFractionDigits:2});
+      document.getElementById('spent').textContent=money(spent); document.getElementById('totalBudget').textContent=money(budget);
+      const amountBox=document.querySelector('.amount'); amountBox.style.color=remaining<0?'#b45d66':'var(--ink)';
+      document.querySelector('.budget-card h3').textContent=remaining<0?'预算已超出':'预算还剩';
+      document.getElementById('progressBar').style.width=Math.min(100,Math.max(0,ratio))+'%';
+      document.querySelector('.progress').setAttribute('aria-valuenow',Math.round(Math.min(100,ratio)));
+      const note=document.getElementById('budgetNote');
+      note.className='budget-note'+(ratio>=85?' warn':'');
+      note.lastElementChild.textContent=ratio>100?`超出预算 ${money(-remaining)}，接下来要收一收啦`:ratio>=85?'预算快见底了，接下来少打几次车吧':ratio>=60?'已经过半，后面的安排留点余量':'预算节奏刚刚好，继续保持';
+      const totals={}; Object.keys(categories).forEach(k=>totals[k]=0); records.forEach(r=>totals[r.category]=(totals[r.category]||0)+Number(r.amount));
+      document.getElementById('categoryList').innerHTML=Object.entries(categories).map(([key,c])=>{const pct=spent?Math.round(totals[key]/spent*100):0;return `<div class="category-row"><div class="cat-icon" style="background:${c.color}">${c.icon}</div><div><div class="cat-top"><strong>${c.label}</strong><span>${money(totals[key])}</span></div><div class="cat-bar"><i style="width:${pct}%;background:${c.bar}"></i></div></div><div class="cat-percent">${pct}%</div></div>`}).join('');
+      const filters=[['all','全部'],...Object.entries(categories).map(([k,v])=>[k,v.label])];
+      document.getElementById('filters').innerHTML=filters.map(([k,l])=>`<button class="filter ${activeFilter===k?'active':''}" data-filter="${k}">${l}</button>`).join('');
+      const shown=records.filter(r=>activeFilter==='all'||r.category===activeFilter).sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
+      document.getElementById('recordCount').textContent=records.length;
+      document.getElementById('recordList').innerHTML=shown.length?shown.map(r=>{const c=categories[r.category]||categories.other;return `<article class="record"><div class="record-icon" style="background:${c.color}">${c.icon}</div><div><div class="record-title">${escapeHtml(r.title)}</div><div class="record-meta">${dateText(r.date)} · ${c.label}</div></div><div class="record-price">-${money(r.amount)}<small>已支付</small></div><button class="delete-btn" data-delete="${r.id}" aria-label="删除 ${escapeHtml(r.title)}">删除</button></article>`}).join(''):'<div class="empty">这一类还没有消费记录</div>';
+    }
+    function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+    const dialog=document.getElementById('entryDialog');
+    document.getElementById('category').innerHTML=Object.entries(categories).map(([k,v])=>`<option value="${k}">${v.icon} ${v.label}</option>`).join('');
+    document.getElementById('date').value='2026-10-02';
+    document.getElementById('addBtn').onclick=()=>{dialog.showModal();setTimeout(()=>document.getElementById('title').focus(),80)};
+    document.getElementById('closeDialog').onclick=()=>dialog.close();
+    dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
+    document.getElementById('entryForm').onsubmit=e=>{e.preventDefault();const fd=new FormData(e.target);records.push({id:Date.now(),title:fd.get('title').trim(),amount:Number(fd.get('amount')),category:fd.get('category'),date:fd.get('date')});persist();render();e.target.reset();document.getElementById('date').value='2026-10-02';dialog.close();showToast('已经记进旅行账本啦')};
+    document.getElementById('filters').onclick=e=>{const b=e.target.closest('[data-filter]');if(!b)return;activeFilter=b.dataset.filter;render()};
+    document.getElementById('recordList').onclick=e=>{const b=e.target.closest('[data-delete]');if(!b)return;records=records.filter(r=>String(r.id)!==b.dataset.delete);persist();render();showToast('这笔记录已删除')};
+    const pop=document.getElementById('budgetPop'); document.getElementById('editBudget').onclick=()=>{document.getElementById('budgetInput').value=budget;pop.classList.toggle('open');document.getElementById('budgetInput').focus()};
+    document.getElementById('saveBudget').onclick=()=>{const v=Number(document.getElementById('budgetInput').value);if(v>0){budget=v;persist();render();pop.classList.remove('open');showToast('总预算已更新')}};
+    function showToast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove('show'),1800)}
+    window.addEventListener('keydown',e=>{if(e.key==='Escape')pop.classList.remove('open')});
+    function registerModelTools(){
+      const context=document.modelContext;
+      if(!context?.registerTool)return;
+      const register=tool=>{try{Promise.resolve(context.registerTool(tool)).catch(()=>{})}catch{}}
+      register({
+        name:'get_trip_budget_summary',title:'查看旅行预算概况',description:'读取当前总预算、总支出、剩余金额和各分类支出，不修改账本。',
+        inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true,untrustedContentHint:false},
+        execute(){const spent=records.reduce((s,r)=>s+Number(r.amount),0);const byCategory={};Object.keys(categories).forEach(k=>byCategory[categories[k].label]=records.filter(r=>r.category===k).reduce((s,r)=>s+Number(r.amount),0));return{budget,spent,remaining:budget-spent,recordCount:records.length,byCategory}}
+      });
+      register({
+        name:'add_trip_expense',title:'添加旅行消费',description:'向当前旅行账本新增一笔消费，并立即更新页面预算和分类统计。',
+        inputSchema:{type:'object',properties:{title:{type:'string',minLength:1},amount:{type:'number',exclusiveMinimum:0},category:{type:'string',enum:Object.keys(categories)},date:{type:'string',pattern:'^\\d{4}-\\d{2}-\\d{2}$'}},required:['title','amount','category','date'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},
+        execute(input){if(!input||!String(input.title||'').trim()||!(Number(input.amount)>0)||!categories[input.category]||!/^\d{4}-\d{2}-\d{2}$/.test(input.date||''))throw new Error('请提供有效的事项、金额、分类和日期');const item={id:Date.now(),title:String(input.title).trim(),amount:Number(input.amount),category:input.category,date:input.date};records.push(item);persist();render();return{ok:true,id:item.id,totalSpent:records.reduce((s,r)=>s+Number(r.amount),0)}}
+      });
+      register({
+        name:'update_trip_budget',title:'调整旅行总预算',description:'设置新的旅行总预算，并立即更新剩余额度和预算提醒。',
+        inputSchema:{type:'object',properties:{budget:{type:'number',exclusiveMinimum:0}},required:['budget'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},
+        execute(input){if(!input||!(Number(input.budget)>0))throw new Error('预算必须大于 0');budget=Number(input.budget);persist();render();return{ok:true,budget,remaining:budget-records.reduce((s,r)=>s+Number(r.amount),0)}}
+      });
+    }
+    render(); registerModelTools();
+  </script>
+</body>
+</html>
