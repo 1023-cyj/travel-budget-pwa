@@ -3,70 +3,71 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#f5eee9" />
+  <meta name="theme-color" content="#f0f5fc" />
   <meta name="description" content="十一旅行预算与消费记账，清楚掌握每一笔花费。" />
   <title>十一旅行账本</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23dbe8e0'/%3E%3Cpath d='M17 40c8-2 13-8 19-19 3-6 8-6 10-3s0 7-4 10L25 42l-7 1z' fill='%23f5c9cf' stroke='%23544d4b' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='m32 29-9-7m10 9 1 11' stroke='%23544d4b' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
   <style>
     :root {
-      --ink:#33302f; --muted:#7b7471; --paper:#fbf8f5; --cream:#f4eee9;
-      --pink:#efc6cc; --pink-deep:#bc747e; --blue:#cbdde7; --blue-deep:#6f8d9c;
-      --green:#cdded2; --green-deep:#66806f; --yellow:#eee1b7; --white:#fffdfb;
-      --shadow:0 18px 44px rgba(77,64,59,.10); --soft-shadow:0 8px 22px rgba(77,64,59,.08);
-      --radius:26px;
+      --ink:#303a4d; --muted:#6f7790; --paper:#f0f5fc; --cream:#f9fbff;
+      --pink:#ffb6c1; --pink-deep:#dc7485; --blue:#5d9bec; --blue-deep:#3974c4;
+      --green:#c1e9d2; --green-deep:#4c9c76; --yellow:#fae37c; --lavender:#d8bfd8; --white:#ffffff;
+      --shadow:0 18px 44px rgba(74,105,153,.13); --soft-shadow:0 9px 25px rgba(74,105,153,.10);
+      --radius:28px;
     }
     *{box-sizing:border-box}
-    html{background:#e9e2dc}
-    body{margin:0;color:var(--ink);font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;background:
-      radial-gradient(circle at 10% 5%,rgba(239,198,204,.46),transparent 28%),
-      radial-gradient(circle at 92% 24%,rgba(203,221,231,.55),transparent 30%),
-      linear-gradient(145deg,#f5eee9,#edf3ef 75%);min-height:100vh}
+    html{background:#eaf2ff}
+    body{margin:0;color:var(--ink);font-family:"Hannotate SC","HanziPen SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:
+      radial-gradient(circle at 8% 6%,rgba(255,182,193,.35),transparent 26%),
+      radial-gradient(circle at 92% 22%,rgba(193,233,210,.62),transparent 31%),
+      linear-gradient(145deg,#f0f5fc 0%,#fbfdff 52%,#eef7f2 100%);min-height:100vh}
     button,input,select{font:inherit}
     button{color:inherit}
     .app{width:min(100%,1180px);margin:0 auto;min-height:100vh;padding:28px 28px 88px}
     .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
     .brand{display:flex;align-items:center;gap:12px}
-    .brand-mark{width:42px;height:42px;border-radius:15px;background:var(--green);display:grid;place-items:center;box-shadow:var(--soft-shadow);font-size:21px;transform:rotate(-4deg)}
-    .eyebrow{font:600 12px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:var(--pink-deep);text-transform:uppercase;margin:0 0 5px}
-    h1{font-family:"Songti SC","STSong",serif;font-size:24px;line-height:1.2;margin:0;font-weight:700;letter-spacing:.02em}
-    .trip-pill{display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(76,65,61,.08);border-radius:999px;background:rgba(255,253,251,.72);font-size:14px;color:var(--muted);backdrop-filter:blur(12px)}
-    .hero{position:relative;overflow:hidden;border-radius:32px;min-height:220px;background:var(--white);box-shadow:var(--shadow);isolation:isolate}
-    .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,253,251,.98) 0%,rgba(255,253,251,.92) 37%,rgba(255,253,251,.05) 77%);z-index:-1}
-    .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-    .hero-copy{padding:30px;max-width:560px}
-    .date-stamp{display:inline-flex;align-items:center;gap:7px;color:var(--green-deep);font-size:14px;font-weight:650;margin-bottom:16px}
-    .date-stamp:before{content:"";width:22px;height:1.5px;background:currentColor}
-    .hero h2{font-family:"Songti SC","STSong",serif;font-size:34px;line-height:1.15;margin:0 0 12px;letter-spacing:.01em}
-    .hero p{margin:0;color:var(--muted);font-size:15px;line-height:1.8;max-width:32em}
-    .grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);gap:22px;margin-top:22px}
-    .panel{background:rgba(255,253,251,.86);border:1px solid rgba(76,65,61,.06);border-radius:var(--radius);box-shadow:var(--soft-shadow);backdrop-filter:blur(14px)}
+    .brand-mark{width:44px;height:44px;border-radius:16px;background:var(--yellow);display:grid;place-items:center;box-shadow:var(--soft-shadow);font-size:22px;transform:rotate(-5deg);border:2px solid rgba(255,255,255,.8)}
+    .eyebrow{font:700 12px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.13em;color:var(--blue-deep);text-transform:uppercase;margin:0 0 5px}
+    h1{font-family:"HanziPen SC","Hannotate SC","Kaiti SC","STKaiti",cursive;font-size:25px;line-height:1.2;margin:0;font-weight:900;letter-spacing:.05em}
+    .trip-pill{display:flex;align-items:center;gap:8px;padding:10px 15px;border:2px solid rgba(255,255,255,.88);border-radius:999px;background:rgba(193,233,210,.75);font-size:14px;color:#426c5b;box-shadow:var(--soft-shadow)}
+    .hero{position:relative;overflow:hidden;border-radius:34px;min-height:300px;background:linear-gradient(135deg,#f0f5fc 0%,#f9fbff 48%,#c1e9d2 100%);box-shadow:var(--shadow);isolation:isolate;border:3px solid rgba(255,255,255,.9)}
+    .hero:before{content:"";position:absolute;width:230px;height:230px;border-radius:50%;right:22%;top:-110px;background:rgba(250,227,124,.78);z-index:-1}
+    .hero:after{content:"";position:absolute;width:260px;height:130px;border-radius:50%;left:-80px;bottom:-82px;background:rgba(255,182,193,.58);transform:rotate(-8deg);z-index:-1}
+    .hero-characters{position:absolute;right:2%;bottom:-9%;width:min(51%,590px);height:112%;object-fit:contain;object-position:right bottom;filter:drop-shadow(0 16px 18px rgba(55,85,111,.18));z-index:1}
+    .hero-copy{position:relative;z-index:2;padding:44px 34px;max-width:52%}
+    .hero-kicker{display:inline-flex;align-items:center;gap:7px;margin-bottom:18px;padding:7px 12px;border-radius:999px;background:var(--yellow);color:#7b6410;font:800 13px/1.2 "Hannotate SC","HanziPen SC",sans-serif;transform:rotate(-2deg);box-shadow:3px 4px 0 rgba(93,155,236,.22)}
+    .hero h2{font-family:"HanziPen SC","Hannotate SC","Kaiti SC","STKaiti",cursive;font-size:42px;line-height:1.28;margin:0 0 14px;letter-spacing:.04em;font-weight:900;color:#263d64;text-shadow:2px 3px 0 rgba(255,255,255,.9)}
+    .hero p{margin:0;color:#63718b;font-size:16px;line-height:1.75;max-width:24em;font-weight:650}
+    .grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);gap:22px;margin-top:22px;min-width:0}
+    .panel{min-width:0;background:rgba(255,255,255,.88);border:2px solid rgba(255,255,255,.95);border-radius:var(--radius);box-shadow:var(--soft-shadow);backdrop-filter:blur(14px)}
     .budget-card{padding:26px;position:relative;overflow:hidden}
-    .budget-card:before{content:"";position:absolute;width:160px;height:160px;border-radius:50%;right:-65px;top:-65px;background:rgba(203,221,231,.5)}
+    .budget-card{background:linear-gradient(145deg,rgba(250,227,124,.70),rgba(255,255,255,.94) 64%)}
+    .budget-card:before{content:"";position:absolute;width:160px;height:160px;border-radius:50%;right:-65px;top:-65px;background:rgba(255,182,193,.48)}
     .section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:22px}
-    .section-head h3{margin:0;font:700 20px/1.35 "Songti SC","STSong",serif}
+    .section-head h3{margin:0;font:900 22px/1.35 "HanziPen SC","Hannotate SC","Kaiti SC","STKaiti",cursive;letter-spacing:.04em}
     .section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}
     .ghost-btn{border:0;background:transparent;padding:4px 0;color:var(--blue-deep);font-size:13px;font-weight:650;cursor:pointer}
     .amount{font-family:ui-rounded,"SF Pro Rounded",system-ui,sans-serif;font-size:44px;font-weight:750;letter-spacing:-.035em;margin:4px 0 8px}
     .amount small{font-size:20px;vertical-align:9px;margin-right:4px;font-weight:650}
     .budget-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:12px}
-    .progress{height:12px;background:#ece7e2;border-radius:99px;overflow:hidden;padding:2px}
-    .progress span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green-deep),var(--blue-deep));transition:width .4s ease}
+    .progress{height:12px;background:rgba(255,255,255,.85);border-radius:99px;overflow:hidden;padding:2px}
+    .progress span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green-deep),var(--blue));transition:width .4s ease}
     .budget-note{display:flex;align-items:center;gap:9px;margin-top:16px;color:var(--green-deep);font-size:14px;font-weight:600}
     .budget-note.warn{color:#b45d66}
     .dot{width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 0 5px color-mix(in srgb,currentColor 15%,transparent)}
-    .category-panel{padding:26px}
+    .category-panel{padding:26px;background:linear-gradient(150deg,rgba(193,233,210,.78),rgba(255,255,255,.94) 70%)}
     .category-row{display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:13px;padding:11px 0}
     .cat-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;font-size:19px}
     .cat-top{display:flex;justify-content:space-between;gap:10px;font-size:14px;margin-bottom:7px}
     .cat-top strong{font-weight:650}.cat-top span{font-variant-numeric:tabular-nums}
     .cat-bar{height:6px;border-radius:99px;background:#eeeae6;overflow:hidden}.cat-bar i{display:block;height:100%;border-radius:inherit}
     .cat-percent{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);width:34px;text-align:right}
-    .records{grid-column:1/-1;padding:26px}
+    .records{grid-column:1/-1;padding:26px;background:linear-gradient(160deg,rgba(240,245,252,.96),rgba(216,191,216,.32))}
     .records-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:18px}
-    .records h3{margin:0 0 5px;font:700 20px/1.35 "Songti SC","STSong",serif}.records-sub{margin:0;color:var(--muted);font-size:13px}
+    .records h3{margin:0 0 5px;font:900 22px/1.35 "HanziPen SC","Hannotate SC","Kaiti SC","STKaiti",cursive;letter-spacing:.04em}.records-sub{margin:0;color:var(--muted);font-size:13px}
     .filters{display:flex;gap:7px;overflow:auto;padding:2px 2px 12px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}
     .filter{white-space:nowrap;border:1px solid #e6dfda;background:transparent;border-radius:99px;padding:8px 13px;font-size:13px;cursor:pointer;transition:.2s}
-    .filter.active{background:var(--ink);border-color:var(--ink);color:white}
+    .filter.active{background:var(--blue);border-color:var(--blue);color:white;box-shadow:3px 4px 0 rgba(216,191,216,.65)}
     .record-list{display:grid;gap:8px}
     .record{display:grid;grid-template-columns:48px minmax(0,1fr) auto auto;align-items:center;gap:14px;padding:13px;border-radius:18px;transition:.2s}
     .record:hover{background:#f6f1ed}.record-icon{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;font-size:20px}
@@ -74,15 +75,15 @@
     .record-price{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right}.record-price small{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-top:3px}
     .delete-btn{opacity:0;border:0;background:transparent;color:#a78f8a;cursor:pointer;padding:8px;border-radius:9px}.record:hover .delete-btn,.delete-btn:focus{opacity:1}
     .empty{text-align:center;padding:42px 12px;color:var(--muted);font-size:14px}
-    .fab{position:fixed;z-index:10;right:max(24px,calc((100vw - 1180px)/2 + 28px));bottom:26px;border:0;border-radius:20px;background:var(--ink);color:white;padding:15px 20px;box-shadow:0 14px 30px rgba(46,42,40,.28);display:flex;align-items:center;gap:9px;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s}.fab:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(46,42,40,.32)}
+    .fab{position:fixed;z-index:10;right:max(24px,calc((100vw - 1180px)/2 + 28px));bottom:26px;border:2px solid white;border-radius:20px;background:var(--blue);color:white;padding:15px 20px;box-shadow:5px 7px 0 rgba(216,191,216,.78),0 14px 30px rgba(57,116,196,.22);display:flex;align-items:center;gap:9px;font-weight:900;cursor:pointer;transition:transform .2s,box-shadow .2s}.fab:hover{transform:translateY(-2px) rotate(-1deg);box-shadow:6px 9px 0 rgba(216,191,216,.78),0 18px 36px rgba(57,116,196,.26)}
     dialog{border:0;padding:0;border-radius:28px;width:min(92vw,470px);background:var(--paper);color:var(--ink);box-shadow:0 28px 80px rgba(50,43,40,.28)}
     dialog::backdrop{background:rgba(48,43,40,.36);backdrop-filter:blur(5px)}
-    .modal{padding:27px}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.modal-head h3{font:700 22px/1.3 "Songti SC","STSong",serif;margin:0}.close{border:0;width:36px;height:36px;border-radius:50%;background:#eee8e3;cursor:pointer;font-size:18px}
+    .modal{padding:27px}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.modal-head h3{font:900 24px/1.3 "HanziPen SC","Hannotate SC","Kaiti SC","STKaiti",cursive;margin:0}.close{border:0;width:36px;height:36px;border-radius:50%;background:var(--pink);cursor:pointer;font-size:18px}
     .field{margin-bottom:16px}.field label{display:block;font-size:13px;font-weight:650;margin-bottom:8px}.field input,.field select{width:100%;border:1px solid #ded5cf;background:white;border-radius:14px;padding:13px 14px;color:var(--ink);outline:none;font-size:16px}.field input:focus,.field select:focus{border-color:var(--blue-deep);box-shadow:0 0 0 3px rgba(111,141,156,.12)}
-    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.submit{width:100%;border:0;border-radius:16px;background:var(--ink);color:white;padding:14px;font-weight:700;cursor:pointer;margin-top:4px}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.submit{width:100%;border:0;border-radius:16px;background:var(--blue);color:white;padding:14px;font-weight:900;cursor:pointer;margin-top:4px;box-shadow:4px 5px 0 rgba(216,191,216,.7)}
     .toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,20px);background:var(--ink);color:white;padding:11px 17px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:30}.toast.show{opacity:1;transform:translate(-50%,0)}
     .budget-pop{position:absolute;right:24px;top:62px;z-index:4;width:235px;background:white;border-radius:18px;box-shadow:var(--shadow);padding:15px;display:none}.budget-pop.open{display:block}.budget-pop label{font-size:12px;font-weight:650;display:block;margin-bottom:7px}.budget-pop .row{display:flex;gap:8px}.budget-pop input{min-width:0;width:100%;border:1px solid #ded5cf;border-radius:11px;padding:9px}.budget-pop button{border:0;border-radius:11px;background:var(--ink);color:white;padding:0 12px;cursor:pointer}
-    @media(max-width:780px){body{background:var(--cream)}.app{padding:18px 16px 100px}.topbar{margin-bottom:16px}.trip-pill{display:none}.hero{min-height:240px;border-radius:27px}.hero-bg{object-position:58% center}.hero:after{background:linear-gradient(90deg,rgba(255,253,251,.98),rgba(255,253,251,.80) 57%,rgba(255,253,251,.06))}.hero-copy{padding:25px 22px;max-width:84%}.hero h2{font-size:29px}.hero p{font-size:14px;line-height:1.65}.grid{grid-template-columns:1fr;gap:15px;margin-top:15px}.panel,.records{border-radius:23px}.budget-card,.category-panel,.records{padding:21px}.records{grid-column:auto}.records-top{display:block}.filters{margin-top:14px}.record{grid-template-columns:44px minmax(0,1fr) auto;padding:10px 4px;gap:11px}.record-icon{width:44px;height:44px}.delete-btn{display:none}.amount{font-size:40px}.fab{right:18px;bottom:18px}.two{grid-template-columns:1fr}.budget-pop{right:18px;top:58px}}
+    @media(max-width:780px){body{background:var(--paper)}.app{padding:18px 16px 100px}.topbar{margin-bottom:16px}.trip-pill{display:none}.hero{min-height:330px;border-radius:28px}.hero:before{width:150px;height:150px;right:-26px;top:-52px}.hero:after{width:190px;height:100px;left:-65px;bottom:-58px}.hero-characters{width:70%;height:71%;right:-6%;bottom:-2%;object-position:right bottom}.hero-copy{padding:27px 22px;max-width:74%}.hero-kicker{font-size:12px;margin-bottom:13px}.hero h2{font-size:32px;line-height:1.28}.hero p{font-size:14px;line-height:1.6;max-width:16em}.grid{grid-template-columns:minmax(0,1fr);gap:15px;margin-top:15px}.panel,.records{border-radius:23px}.budget-card,.category-panel,.records{padding:21px}.records{grid-column:auto}.records-top{display:block}.filters{margin-top:14px;max-width:100%}.record{grid-template-columns:44px minmax(0,1fr) auto;padding:10px 4px;gap:11px}.record-icon{width:44px;height:44px}.delete-btn{display:none}.amount{font-size:40px}.fab{right:18px;bottom:18px}.two{grid-template-columns:1fr}.budget-pop{right:18px;top:58px}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
@@ -94,11 +95,11 @@
     </header>
 
     <section class="hero" aria-label="本次旅行">
-      <img class="hero-bg" src="assets/travel-journal.png" alt="粉蓝绿旅行手账、地图与拍立得照片" />
+      <img class="hero-characters" src="assets/lulu-duo-cutout.png" alt="两只黄色噜噜旅行伙伴" />
       <div class="hero-copy">
-        <div class="date-stamp">5天 4夜 · 国庆小旅行</div>
-        <h2>把钱花在<br>值得记住的风景里</h2>
-        <p>每一笔都记清楚，既不委屈旅行，也不让假期后的自己吃土。</p>
+        <div class="hero-kicker">HOLIDAY MOMENTS</div>
+        <h2>人生是由<br>无数个瞬间<br>组成。</h2>
+        <p>把沿途的小确幸，一笔一笔认真收好。</p>
       </div>
     </section>
 
@@ -143,12 +144,12 @@
 
   <script>
     const categories = {
-      transport:{label:'行程交通',icon:'✈️',color:'#c8dce7',bar:'#7f9fad'},
-      hotel:{label:'酒店住宿',icon:'🛏️',color:'#efd0d4',bar:'#bc7d86'},
-      ticket:{label:'景点门票',icon:'🎫',color:'#d1e0d5',bar:'#76907d'},
-      food:{label:'吃吃喝喝',icon:'🍜',color:'#eee1b7',bar:'#b59b57'},
-      taxi:{label:'短途打车',icon:'🚕',color:'#ddd6ea',bar:'#8b7aa2'},
-      other:{label:'其他',icon:'🧺',color:'#e5ddd7',bar:'#95847b'}
+      transport:{label:'行程交通',icon:'✈️',color:'#dbe9fc',bar:'#5d9bec'},
+      hotel:{label:'酒店住宿',icon:'🛏️',color:'#ffdbe1',bar:'#ff8ea0'},
+      ticket:{label:'景点门票',icon:'🎫',color:'#def4e8',bar:'#6ebc91'},
+      food:{label:'吃吃喝喝',icon:'🍜',color:'#fff2b8',bar:'#e3bf38'},
+      taxi:{label:'短途打车',icon:'🚕',color:'#eee1ee',bar:'#b58ab5'},
+      other:{label:'其他',icon:'🧺',color:'#f0f5fc',bar:'#8395b4'}
     };
     const seed = [
       {id:1,title:'上海 → 杭州高铁',amount:328,category:'transport',date:'2026-10-01'},
