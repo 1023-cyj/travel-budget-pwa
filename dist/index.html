@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f0f5fc" />
   <meta name="description" content="十一旅行预算与消费记账，清楚掌握每一笔花费。" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="旅行账本" />
   <title>十一旅行账本</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./assets/icon-180.png" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23dbe8e0'/%3E%3Cpath d='M17 40c8-2 13-8 19-19 3-6 8-6 10-3s0 7-4 10L25 42l-7 1z' fill='%23f5c9cf' stroke='%23544d4b' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='m32 29-9-7m10 9 1 11' stroke='%23544d4b' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
   <style>
     :root {
@@ -29,7 +34,7 @@
     .brand-mark{width:44px;height:44px;border-radius:16px;background:var(--yellow);display:grid;place-items:center;box-shadow:var(--soft-shadow);font-size:22px;transform:rotate(-5deg);border:2px solid rgba(255,255,255,.8)}
     .eyebrow{font:700 12px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.13em;color:var(--blue-deep);text-transform:uppercase;margin:0 0 5px}
     h1{font-family:"HanziPen SC","Hannotate SC","Kaiti SC","STKaiti",cursive;font-size:25px;line-height:1.2;margin:0;font-weight:900;letter-spacing:.05em}
-    .trip-pill{display:flex;align-items:center;gap:8px;padding:10px 15px;border:2px solid rgba(255,255,255,.88);border-radius:999px;background:rgba(193,233,210,.75);font-size:14px;color:#426c5b;box-shadow:var(--soft-shadow)}
+    .backup-btn{display:flex;align-items:center;gap:8px;padding:10px 15px;border:2px solid rgba(255,255,255,.88);border-radius:999px;background:rgba(193,233,210,.75);font-size:14px;font-weight:750;color:#426c5b;box-shadow:var(--soft-shadow);cursor:pointer}
     .hero{position:relative;overflow:hidden;border-radius:34px;min-height:300px;background:linear-gradient(135deg,#f0f5fc 0%,#f9fbff 48%,#c1e9d2 100%);box-shadow:var(--shadow);isolation:isolate;border:3px solid rgba(255,255,255,.9)}
     .hero:before{content:"";position:absolute;width:230px;height:230px;border-radius:50%;right:22%;top:-110px;background:rgba(250,227,124,.78);z-index:-1}
     .hero:after{content:"";position:absolute;width:260px;height:130px;border-radius:50%;left:-80px;bottom:-82px;background:rgba(255,182,193,.58);transform:rotate(-8deg);z-index:-1}
@@ -81,9 +86,10 @@
     .modal{padding:27px}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.modal-head h3{font:900 24px/1.3 "HanziPen SC","Hannotate SC","Kaiti SC","STKaiti",cursive;margin:0}.close{border:0;width:36px;height:36px;border-radius:50%;background:var(--pink);cursor:pointer;font-size:18px}
     .field{margin-bottom:16px}.field label{display:block;font-size:13px;font-weight:650;margin-bottom:8px}.field input,.field select{width:100%;border:1px solid #ded5cf;background:white;border-radius:14px;padding:13px 14px;color:var(--ink);outline:none;font-size:16px}.field input:focus,.field select:focus{border-color:var(--blue-deep);box-shadow:0 0 0 3px rgba(111,141,156,.12)}
     .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.submit{width:100%;border:0;border-radius:16px;background:var(--blue);color:white;padding:14px;font-weight:900;cursor:pointer;margin-top:4px;box-shadow:4px 5px 0 rgba(216,191,216,.7)}
+    .backup-copy{margin:-6px 0 18px;color:var(--muted);font-size:14px;line-height:1.65}.backup-actions{display:grid;gap:11px}.backup-action{width:100%;border:0;border-radius:16px;padding:14px 16px;font-weight:850;cursor:pointer;text-align:center}.backup-action.primary{background:var(--blue);color:white;box-shadow:4px 5px 0 rgba(216,191,216,.7)}.backup-action.secondary{background:var(--green);color:#376b56}.backup-file{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
     .toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,20px);background:var(--ink);color:white;padding:11px 17px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:30}.toast.show{opacity:1;transform:translate(-50%,0)}
     .budget-pop{position:absolute;right:24px;top:62px;z-index:4;width:235px;background:white;border-radius:18px;box-shadow:var(--shadow);padding:15px;display:none}.budget-pop.open{display:block}.budget-pop label{font-size:12px;font-weight:650;display:block;margin-bottom:7px}.budget-pop .row{display:flex;gap:8px}.budget-pop input{min-width:0;width:100%;border:1px solid #ded5cf;border-radius:11px;padding:9px}.budget-pop button{border:0;border-radius:11px;background:var(--ink);color:white;padding:0 12px;cursor:pointer}
-    @media(max-width:780px){body{background:var(--paper)}.app{padding:18px 16px 100px}.topbar{margin-bottom:16px}.trip-pill{display:none}.hero{min-height:330px;border-radius:28px}.hero:before{width:150px;height:150px;right:-26px;top:-52px}.hero:after{width:190px;height:100px;left:-65px;bottom:-58px}.hero-characters{width:70%;height:71%;right:-6%;bottom:-2%;object-position:right bottom}.hero-copy{padding:27px 22px;max-width:74%}.hero-kicker{font-size:12px;margin-bottom:13px}.hero h2{font-size:32px;line-height:1.28}.hero p{font-size:14px;line-height:1.6;max-width:16em}.grid{grid-template-columns:minmax(0,1fr);gap:15px;margin-top:15px}.panel,.records{border-radius:23px}.budget-card,.category-panel,.records{padding:21px}.records{grid-column:auto}.records-top{display:block}.filters{margin-top:14px;max-width:100%}.record{grid-template-columns:44px minmax(0,1fr) auto;padding:10px 4px;gap:11px}.record-icon{width:44px;height:44px}.delete-btn{display:none}.amount{font-size:40px}.fab{right:18px;bottom:18px}.two{grid-template-columns:1fr}.budget-pop{right:18px;top:58px}}
+    @media(max-width:780px){body{background:var(--paper)}.app{padding:18px 16px 100px}.topbar{margin-bottom:16px}.backup-btn{padding:9px 12px;font-size:13px}.hero{min-height:330px;border-radius:28px}.hero:before{width:150px;height:150px;right:-26px;top:-52px}.hero:after{width:190px;height:100px;left:-65px;bottom:-58px}.hero-characters{width:70%;height:71%;right:-6%;bottom:-2%;object-position:right bottom}.hero-copy{padding:27px 22px;max-width:74%}.hero-kicker{font-size:12px;margin-bottom:13px}.hero h2{font-size:32px;line-height:1.28}.hero p{font-size:14px;line-height:1.6;max-width:16em}.grid{grid-template-columns:minmax(0,1fr);gap:15px;margin-top:15px}.panel,.records{border-radius:23px}.budget-card,.category-panel,.records{padding:21px}.records{grid-column:auto}.records-top{display:block}.filters{margin-top:14px;max-width:100%}.record{grid-template-columns:44px minmax(0,1fr) auto;padding:10px 4px;gap:11px}.record-icon{width:44px;height:44px}.delete-btn{display:none}.amount{font-size:40px}.fab{right:18px;bottom:18px}.two{grid-template-columns:1fr}.budget-pop{right:18px;top:58px}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
@@ -91,7 +97,7 @@
   <main class="app">
     <header class="topbar">
       <div class="brand"><div class="brand-mark" aria-hidden="true">✈</div><div><p class="eyebrow">TRIP NOTES · 2026</p><h1>十一旅行账本</h1></div></div>
-      <div class="trip-pill">📍 杭州 · 10月1日—5日</div>
+      <button class="backup-btn" id="openBackup" type="button">☁️ 备份账单</button>
     </header>
 
     <section class="hero" aria-label="本次旅行">
@@ -139,6 +145,17 @@
       <div class="field"><label for="date">日期</label><input id="date" name="date" type="date" required /></div>
       <button class="submit" type="submit">保存这一笔</button>
     </form>
+  </dialog>
+  <dialog id="backupDialog">
+    <div class="modal">
+      <div class="modal-head"><h3>备份与恢复</h3><button type="button" class="close" id="closeBackup" aria-label="关闭">×</button></div>
+      <p class="backup-copy">账单默认只保存在这台手机里。下载备份后，即使更换手机或清理浏览器，也可以重新导入。</p>
+      <div class="backup-actions">
+        <button class="backup-action primary" id="exportData" type="button">下载账单备份</button>
+        <label class="backup-action secondary" for="importData">导入账单备份</label>
+        <input class="backup-file" id="importData" type="file" accept="application/json,.json" />
+      </div>
+    </div>
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite">已经记进旅行账本啦</div>
 
@@ -196,6 +213,30 @@
     document.getElementById('recordList').onclick=e=>{const b=e.target.closest('[data-delete]');if(!b)return;records=records.filter(r=>String(r.id)!==b.dataset.delete);persist();render();showToast('这笔记录已删除')};
     const pop=document.getElementById('budgetPop'); document.getElementById('editBudget').onclick=()=>{document.getElementById('budgetInput').value=budget;pop.classList.toggle('open');document.getElementById('budgetInput').focus()};
     document.getElementById('saveBudget').onclick=()=>{const v=Number(document.getElementById('budgetInput').value);if(v>0){budget=v;persist();render();pop.classList.remove('open');showToast('总预算已更新')}};
+    const backupDialog=document.getElementById('backupDialog');
+    document.getElementById('openBackup').onclick=()=>backupDialog.showModal();
+    document.getElementById('closeBackup').onclick=()=>backupDialog.close();
+    backupDialog.addEventListener('click',e=>{if(e.target===backupDialog)backupDialog.close()});
+    document.getElementById('exportData').onclick=async()=>{
+      const payload={version:1,exportedAt:new Date().toISOString(),budget,records};
+      const filename=`旅行账本备份-${new Date().toISOString().slice(0,10)}.json`;
+      const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+      const file=typeof File==='function'?new File([blob],filename,{type:'application/json'}):null;
+      if(file&&navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:'旅行账本备份'}).catch(()=>{})}
+      else{const link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download=filename;link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000)}
+      showToast('备份文件已生成');
+    };
+    document.getElementById('importData').onchange=async e=>{
+      const file=e.target.files?.[0];if(!file)return;
+      try{
+        const data=JSON.parse(await file.text());
+        if(!(Number(data.budget)>0)||!Array.isArray(data.records))throw new Error('invalid');
+        const valid=data.records.every(r=>r&&String(r.title||'').trim()&&Number(r.amount)>0&&categories[r.category]&&/^\d{4}-\d{2}-\d{2}$/.test(r.date||''));
+        if(!valid)throw new Error('invalid');
+        budget=Number(data.budget);records=data.records.map(r=>({id:r.id||Date.now()+Math.random(),title:String(r.title).trim(),amount:Number(r.amount),category:r.category,date:r.date}));
+        persist();render();backupDialog.close();showToast('账单已经恢复');
+      }catch{showToast('这个备份文件无法识别')}finally{e.target.value=''}
+    };
     function showToast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove('show'),1800)}
     window.addEventListener('keydown',e=>{if(e.key==='Escape')pop.classList.remove('open')});
     function registerModelTools(){
@@ -219,6 +260,7 @@
       });
     }
     render(); registerModelTools();
+    if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}))}
   </script>
 </body>
 </html>
