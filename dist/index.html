@@ -47,7 +47,7 @@
     .panel{min-width:0;background:rgba(255,255,255,.88);border:2px solid rgba(255,255,255,.95);border-radius:var(--radius);box-shadow:var(--soft-shadow);backdrop-filter:blur(14px)}
     .budget-card{padding:26px;position:relative;overflow:hidden}
     .budget-card{background:linear-gradient(145deg,rgba(250,227,124,.70),rgba(255,255,255,.94) 64%)}
-    .budget-card:before{content:"";position:absolute;width:160px;height:160px;border-radius:50%;right:-65px;top:-65px;background:rgba(255,182,193,.48)}
+    .budget-card:before{content:"";position:absolute;width:160px;height:160px;border-radius:50%;right:-65px;top:-65px;background:rgba(255,182,193,.48);pointer-events:none}
     .section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:22px}
     .section-head h3{margin:0;font:900 22px/1.35 "HanziPen SC","Hannotate SC","Kaiti SC","STKaiti",cursive;letter-spacing:.04em}
     .section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}
@@ -74,11 +74,11 @@
     .filter{white-space:nowrap;border:1px solid #e6dfda;background:transparent;border-radius:99px;padding:8px 13px;font-size:13px;cursor:pointer;transition:.2s}
     .filter.active{background:var(--blue);border-color:var(--blue);color:white;box-shadow:3px 4px 0 rgba(216,191,216,.65)}
     .record-list{display:grid;gap:8px}
-    .record{display:grid;grid-template-columns:48px minmax(0,1fr) auto auto;align-items:center;gap:14px;padding:13px;border-radius:18px;transition:.2s}
+    .record{display:grid;grid-template-columns:48px minmax(0,1fr) auto;align-items:center;gap:14px;padding:13px;border-radius:18px;transition:.2s}
     .record:hover{background:#f6f1ed}.record-icon{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;font-size:20px}
     .record-title{font-size:15px;font-weight:650;margin-bottom:4px}.record-meta{font-size:12px;color:var(--muted)}
-    .record-price{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right}.record-price small{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-top:3px}
-    .delete-btn{opacity:0;border:0;background:transparent;color:#a78f8a;cursor:pointer;padding:8px;border-radius:9px}.record:hover .delete-btn,.delete-btn:focus{opacity:1}
+    .record-side{display:flex;align-items:flex-end;gap:10px}.record-price{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right}.record-price small{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-top:3px}
+    .record-actions{display:flex;gap:5px}.record-action{border:1px solid #e1d9d4;background:rgba(255,255,255,.82);color:#756a66;cursor:pointer;padding:7px 9px;border-radius:10px;font-size:12px;white-space:nowrap}.record-action:hover,.record-action:focus-visible{border-color:var(--blue);color:var(--blue-deep);background:white}.record-action.danger:hover,.record-action.danger:focus-visible{border-color:#dc7485;color:#b45d66}
     .empty{text-align:center;padding:42px 12px;color:var(--muted);font-size:14px}
     .fab{position:fixed;z-index:10;right:max(24px,calc((100vw - 1180px)/2 + 28px));bottom:26px;border:2px solid white;border-radius:20px;background:var(--blue);color:white;padding:15px 20px;box-shadow:5px 7px 0 rgba(216,191,216,.78),0 14px 30px rgba(57,116,196,.22);display:flex;align-items:center;gap:9px;font-weight:900;cursor:pointer;transition:transform .2s,box-shadow .2s}.fab:hover{transform:translateY(-2px) rotate(-1deg);box-shadow:6px 9px 0 rgba(216,191,216,.78),0 18px 36px rgba(57,116,196,.26)}
     dialog{border:0;padding:0;border-radius:28px;width:min(92vw,470px);background:var(--paper);color:var(--ink);box-shadow:0 28px 80px rgba(50,43,40,.28)}
@@ -88,8 +88,8 @@
     .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.submit{width:100%;border:0;border-radius:16px;background:var(--blue);color:white;padding:14px;font-weight:900;cursor:pointer;margin-top:4px;box-shadow:4px 5px 0 rgba(216,191,216,.7)}
     .backup-copy{margin:-6px 0 18px;color:var(--muted);font-size:14px;line-height:1.65}.backup-actions{display:grid;gap:11px}.backup-action{width:100%;border:0;border-radius:16px;padding:14px 16px;font-weight:850;cursor:pointer;text-align:center}.backup-action.primary{background:var(--blue);color:white;box-shadow:4px 5px 0 rgba(216,191,216,.7)}.backup-action.secondary{background:var(--green);color:#376b56}.backup-file{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
     .toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,20px);background:var(--ink);color:white;padding:11px 17px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:30}.toast.show{opacity:1;transform:translate(-50%,0)}
-    .budget-pop{position:absolute;right:24px;top:62px;z-index:4;width:235px;background:white;border-radius:18px;box-shadow:var(--shadow);padding:15px;display:none}.budget-pop.open{display:block}.budget-pop label{font-size:12px;font-weight:650;display:block;margin-bottom:7px}.budget-pop .row{display:flex;gap:8px}.budget-pop input{min-width:0;width:100%;border:1px solid #ded5cf;border-radius:11px;padding:9px}.budget-pop button{border:0;border-radius:11px;background:var(--ink);color:white;padding:0 12px;cursor:pointer}
-    @media(max-width:780px){body{background:var(--paper)}.app{padding:18px 16px 100px}.topbar{margin-bottom:16px}.backup-btn{padding:9px 12px;font-size:13px}.hero{min-height:330px;border-radius:28px}.hero:before{width:150px;height:150px;right:-26px;top:-52px}.hero:after{width:190px;height:100px;left:-65px;bottom:-58px}.hero-characters{width:70%;height:71%;right:-6%;bottom:-2%;object-position:right bottom}.hero-copy{padding:27px 22px;max-width:74%}.hero-kicker{font-size:12px;margin-bottom:13px}.hero h2{font-size:32px;line-height:1.28}.hero p{font-size:14px;line-height:1.6;max-width:16em}.grid{grid-template-columns:minmax(0,1fr);gap:15px;margin-top:15px}.panel,.records{border-radius:23px}.budget-card,.category-panel,.records{padding:21px}.records{grid-column:auto}.records-top{display:block}.filters{margin-top:14px;max-width:100%}.record{grid-template-columns:44px minmax(0,1fr) auto;padding:10px 4px;gap:11px}.record-icon{width:44px;height:44px}.delete-btn{display:none}.amount{font-size:40px}.fab{right:18px;bottom:18px}.two{grid-template-columns:1fr}.budget-pop{right:18px;top:58px}}
+    .form-error{min-height:18px;margin:7px 0 0;color:#b45d66;font-size:13px}.dialog-actions{display:flex;gap:10px;margin-top:4px}.dialog-actions button{flex:1}.secondary-btn{border:0;border-radius:16px;background:#e7eef8;color:var(--blue-deep);padding:14px;font-weight:800;cursor:pointer}.budget-form .field{margin-bottom:10px}
+    @media(max-width:780px){body{background:var(--paper)}.app{padding:18px 16px 100px}.topbar{margin-bottom:16px}.backup-btn{padding:9px 12px;font-size:13px}.hero{min-height:330px;border-radius:28px}.hero:before{width:150px;height:150px;right:-26px;top:-52px}.hero:after{width:190px;height:100px;left:-65px;bottom:-58px}.hero-characters{width:70%;height:71%;right:-6%;bottom:-2%;object-position:right bottom}.hero-copy{padding:27px 22px;max-width:74%}.hero-kicker{font-size:12px;margin-bottom:13px}.hero h2{font-size:32px;line-height:1.28}.hero p{font-size:14px;line-height:1.6;max-width:16em}.grid{grid-template-columns:minmax(0,1fr);gap:15px;margin-top:15px}.panel,.records{border-radius:23px}.budget-card,.category-panel,.records{padding:21px}.records{grid-column:auto}.records-top{display:block}.filters{margin-top:14px;max-width:100%}.record{grid-template-columns:44px minmax(0,1fr);padding:10px 4px;gap:11px}.record-icon{width:44px;height:44px}.record-side{grid-column:2;justify-content:space-between;align-items:center;gap:8px}.record-actions{gap:4px}.record-action{padding:7px 10px}.amount{font-size:40px}.fab{right:18px;bottom:18px}.two{grid-template-columns:1fr}.dialog-actions{flex-direction:column-reverse}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
@@ -112,7 +112,6 @@
     <div class="grid">
       <section class="panel budget-card" aria-labelledby="budgetTitle">
         <div class="section-head"><div><h3 id="budgetTitle">预算还剩</h3><p>实时跟着每一笔消费变化</p></div><button class="ghost-btn" id="editBudget">调整预算</button></div>
-        <div class="budget-pop" id="budgetPop"><label for="budgetInput">总预算（元）</label><div class="row"><input id="budgetInput" inputmode="decimal" type="number" min="1" /><button id="saveBudget">保存</button></div></div>
         <div class="amount"><small>¥</small><span id="remaining">0</span></div>
         <div class="budget-meta"><span>已花 <b id="spent">¥0</b></span><span>总预算 <b id="totalBudget">¥0</b></span></div>
         <div class="progress" role="progressbar" aria-label="预算使用比例" aria-valuemin="0" aria-valuemax="100"><span id="progressBar"></span></div>
@@ -125,25 +124,35 @@
       </section>
 
       <section class="panel records" aria-labelledby="recordsTitle">
-        <div class="records-top"><div><h3 id="recordsTitle">旅行明细</h3><p class="records-sub"><span id="recordCount">0</span> 笔消费 · 最近记录在最上面</p></div></div>
+        <div class="records-top"><div><h3 id="recordsTitle">旅行明细</h3><p class="records-sub" id="recordsSummary">0 笔消费 · 最近记录在最上面</p></div><button class="ghost-btn" id="addInline" type="button">＋ 记一笔</button></div>
         <div class="filters" id="filters" aria-label="消费分类筛选"></div>
         <div class="record-list" id="recordList"></div>
       </section>
     </div>
   </main>
 
-  <button class="fab" id="addBtn"><span aria-hidden="true">＋</span> 记一笔</button>
+  <button class="fab" id="addBtn" type="button"><span aria-hidden="true">＋</span> 记一笔</button>
 
   <dialog id="entryDialog">
     <form class="modal" id="entryForm">
-      <div class="modal-head"><h3>今天花了什么？</h3><button type="button" class="close" id="closeDialog" aria-label="关闭">×</button></div>
+      <div class="modal-head"><h3 id="entryTitle">今天花了什么？</h3><button type="button" class="close" id="closeDialog" aria-label="关闭">×</button></div>
       <div class="field"><label for="title">消费事项</label><input id="title" name="title" placeholder="例如：西湖边的午餐" autocomplete="off" required /></div>
       <div class="two">
         <div class="field"><label for="amount">金额（元）</label><input id="amount" name="amount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00" required /></div>
         <div class="field"><label for="category">分类</label><select id="category" name="category"></select></div>
       </div>
       <div class="field"><label for="date">日期</label><input id="date" name="date" type="date" required /></div>
-      <button class="submit" type="submit">保存这一笔</button>
+      <p class="form-error" id="entryError" role="alert"></p>
+      <div class="dialog-actions"><button class="secondary-btn" id="cancelEntry" type="button">取消</button><button class="submit" id="submitEntry" type="submit">保存这一笔</button></div>
+    </form>
+  </dialog>
+  <dialog id="budgetDialog">
+    <form class="modal budget-form" id="budgetForm">
+      <div class="modal-head"><h3>调整旅行预算</h3><button type="button" class="close" id="closeBudget" aria-label="关闭">×</button></div>
+      <p class="backup-copy">修改后会立即重新计算剩余预算和使用进度。</p>
+      <div class="field"><label for="budgetInput">总预算（元）</label><input id="budgetInput" inputmode="decimal" type="number" min="1" step="0.01" required /></div>
+      <p class="form-error" id="budgetError" role="alert"></p>
+      <div class="dialog-actions"><button class="secondary-btn" id="cancelBudget" type="button">取消</button><button class="submit" id="saveBudget" type="submit">保存预算</button></div>
     </form>
   </dialog>
   <dialog id="backupDialog">
@@ -174,71 +183,60 @@
       {id:3,title:'灵隐寺门票',amount:75,category:'ticket',date:'2026-10-02'},
       {id:4,title:'龙井茶园午餐',amount:186,category:'food',date:'2026-10-02'},
       {id:5,title:'酒店 → 西湖打车',amount:34,category:'taxi',date:'2026-10-02'},
-      {id:6,title:'西溪湿地船票',amount:120,category:'ticket',date:'2026-10-03'}
+      {id:6,title:'西溪湿地船票',amount:120,category:'ticket',date:'2026-10-03'},
+      {id:1789890463270,title:'重庆-成都',amount:81,category:'transport',date:'2026-10-01'},
+      {id:1789890503487,title:'成都-黄龙九寨',amount:286,category:'transport',date:'2026-10-01'},
+      {id:1789890583641,title:'黄龙九寨-九寨沟',amount:60,category:'transport',date:'2026-10-01'},
+      {id:1789890630551,title:'九寨沟-黄龙九寨',amount:100,category:'transport',date:'2026-10-02'},
+      {id:1789890657056,title:'九寨沟-松潘',amount:100,category:'transport',date:'2026-10-02'}
     ];
-    let budget = Number(localStorage.getItem('trip-budget')) || 5000;
-    let records = JSON.parse(localStorage.getItem('trip-records') || 'null') || seed;
+    const cloneSeed=()=>seed.map(r=>({...r}));
+    const normalizeRecord=r=>{if(!r||!String(r.title||'').trim()||!(Number(r.amount)>0)||!categories[r.category]||!/^(\d{4})-(\d{2})-(\d{2})$/.test(r.date||''))return null;return{id:Number(r.id)||Date.now()+Math.random(),title:String(r.title).trim(),amount:Number(r.amount),category:r.category,date:r.date}};
+    function loadRecords(){try{const raw=localStorage.getItem('trip-records');if(!raw)return cloneSeed();const parsed=JSON.parse(raw);if(!Array.isArray(parsed))return cloneSeed();const cleaned=parsed.map(normalizeRecord).filter(Boolean);return parsed.length===0||cleaned.length===parsed.length?cleaned:cloneSeed()}catch{return cloneSeed()}}
+    function loadBudget(){try{const value=Number(localStorage.getItem('trip-budget'));return value>0?value:5000}catch{return 5000}}
+    let budget = loadBudget();
+    let records = loadRecords();
     let activeFilter = 'all';
+    let editingId = null;
     const money = n => '¥' + Number(n).toLocaleString('zh-CN',{minimumFractionDigits:Number(n)%1?2:0,maximumFractionDigits:2});
-    const dateText = d => { const x = new Date(d+'T12:00:00'); return `${x.getMonth()+1}月${x.getDate()}日`; };
-    function persist(){ localStorage.setItem('trip-budget',budget); localStorage.setItem('trip-records',JSON.stringify(records)); }
+    const dateText = d => { const x = new Date(d+'T12:00:00'); return Number.isNaN(x.getTime())?'日期未知':`${x.getMonth()+1}月${x.getDate()}日`; };
+    const defaultDate = () => records.slice().sort((a,b)=>b.date.localeCompare(a.date))[0]?.date || new Date().toISOString().slice(0,10);
+    function persist(){try{localStorage.setItem('trip-budget',String(budget));localStorage.setItem('trip-records',JSON.stringify(records));return true}catch{showToast('保存失败，请检查浏览器存储空间');return false}}
     function render(){
-      const spent = records.reduce((s,r)=>s+Number(r.amount),0), remaining=budget-spent, ratio=budget?spent/budget*100:0;
+      const spent=records.reduce((s,r)=>s+Number(r.amount),0), remaining=budget-spent, ratio=budget?spent/budget*100:0;
       document.getElementById('remaining').textContent=Math.abs(remaining).toLocaleString('zh-CN',{maximumFractionDigits:2});
-      document.getElementById('spent').textContent=money(spent); document.getElementById('totalBudget').textContent=money(budget);
-      const amountBox=document.querySelector('.amount'); amountBox.style.color=remaining<0?'#b45d66':'var(--ink)';
+      document.getElementById('spent').textContent=money(spent);document.getElementById('totalBudget').textContent=money(budget);
+      const amountBox=document.querySelector('.amount');amountBox.style.color=remaining<0?'#b45d66':'var(--ink)';
       document.querySelector('.budget-card h3').textContent=remaining<0?'预算已超出':'预算还剩';
       document.getElementById('progressBar').style.width=Math.min(100,Math.max(0,ratio))+'%';
       document.querySelector('.progress').setAttribute('aria-valuenow',Math.round(Math.min(100,ratio)));
-      const note=document.getElementById('budgetNote');
-      note.className='budget-note'+(ratio>=85?' warn':'');
+      const note=document.getElementById('budgetNote');note.className='budget-note'+(ratio>=85?' warn':'');
       note.lastElementChild.textContent=ratio>100?`超出预算 ${money(-remaining)}，接下来要收一收啦`:ratio>=85?'预算快见底了，接下来少打几次车吧':ratio>=60?'已经过半，后面的安排留点余量':'预算节奏刚刚好，继续保持';
-      const totals={}; Object.keys(categories).forEach(k=>totals[k]=0); records.forEach(r=>totals[r.category]=(totals[r.category]||0)+Number(r.amount));
+      const totals={};Object.keys(categories).forEach(k=>totals[k]=0);records.forEach(r=>totals[r.category]=(totals[r.category]||0)+Number(r.amount));
       document.getElementById('categoryList').innerHTML=Object.entries(categories).map(([key,c])=>{const pct=spent?Math.round(totals[key]/spent*100):0;return `<div class="category-row"><div class="cat-icon" style="background:${c.color}">${c.icon}</div><div><div class="cat-top"><strong>${c.label}</strong><span>${money(totals[key])}</span></div><div class="cat-bar"><i style="width:${pct}%;background:${c.bar}"></i></div></div><div class="cat-percent">${pct}%</div></div>`}).join('');
-      const filters=[['all','全部'],...Object.entries(categories).map(([k,v])=>[k,v.label])];
-      document.getElementById('filters').innerHTML=filters.map(([k,l])=>`<button class="filter ${activeFilter===k?'active':''}" data-filter="${k}">${l}</button>`).join('');
-      const shown=records.filter(r=>activeFilter==='all'||r.category===activeFilter).sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
-      document.getElementById('recordCount').textContent=records.length;
-      document.getElementById('recordList').innerHTML=shown.length?shown.map(r=>{const c=categories[r.category]||categories.other;return `<article class="record"><div class="record-icon" style="background:${c.color}">${c.icon}</div><div><div class="record-title">${escapeHtml(r.title)}</div><div class="record-meta">${dateText(r.date)} · ${c.label}</div></div><div class="record-price">-${money(r.amount)}<small>已支付</small></div><button class="delete-btn" data-delete="${r.id}" aria-label="删除 ${escapeHtml(r.title)}">删除</button></article>`}).join(''):'<div class="empty">这一类还没有消费记录</div>';
+      const filters=[['all','全部'],...Object.entries(categories).map(([k,v])=>[k,v.label])];document.getElementById('filters').innerHTML=filters.map(([k,l])=>`<button type="button" class="filter ${activeFilter===k?'active':''}" data-filter="${k}" aria-pressed="${activeFilter===k}">${l}</button>`).join('');
+      const shown=records.filter(r=>activeFilter==='all'||r.category===activeFilter).slice().sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
+      document.getElementById('recordsSummary').textContent=activeFilter==='all'?`${records.length} 笔消费 · 最近记录在最上面`:`${shown.length} 笔筛选结果 · 共 ${records.length} 笔消费`;
+      document.getElementById('recordList').innerHTML=shown.length?shown.map(r=>{const c=categories[r.category]||categories.other;return `<article class="record"><div class="record-icon" style="background:${c.color}">${c.icon}</div><div><div class="record-title">${escapeHtml(r.title)}</div><div class="record-meta">${dateText(r.date)} · ${c.label}</div></div><div class="record-side"><div class="record-price">-${money(r.amount)}<small>已支付</small></div><div class="record-actions"><button class="record-action" type="button" data-edit="${r.id}" aria-label="编辑 ${escapeHtml(r.title)}">编辑</button><button class="record-action danger" type="button" data-delete="${r.id}" aria-label="删除 ${escapeHtml(r.title)}">删除</button></div></div></article>`}).join(''):'<div class="empty">还没有消费记录，点击「记一笔」开始记录</div>';
     }
     function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
-    const dialog=document.getElementById('entryDialog');
+    const dialog=document.getElementById('entryDialog'),entryForm=document.getElementById('entryForm'),entryError=document.getElementById('entryError');
     document.getElementById('category').innerHTML=Object.entries(categories).map(([k,v])=>`<option value="${k}">${v.icon} ${v.label}</option>`).join('');
-    document.getElementById('date').value='2026-10-02';
-    document.getElementById('addBtn').onclick=()=>{dialog.showModal();setTimeout(()=>document.getElementById('title').focus(),80)};
-    document.getElementById('closeDialog').onclick=()=>dialog.close();
-    dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
-    document.getElementById('entryForm').onsubmit=e=>{e.preventDefault();const fd=new FormData(e.target);records.push({id:Date.now(),title:fd.get('title').trim(),amount:Number(fd.get('amount')),category:fd.get('category'),date:fd.get('date')});persist();render();e.target.reset();document.getElementById('date').value='2026-10-02';dialog.close();showToast('已经记进旅行账本啦')};
+    function openEntry(id=null){editingId=id;entryError.textContent='';entryForm.reset();const item=id===null?null:records.find(r=>String(r.id)===String(id));document.getElementById('entryTitle').textContent=item?'修改这笔消费':'今天花了什么？';document.getElementById('submitEntry').textContent=item?'保存修改':'保存这一笔';document.getElementById('title').value=item?item.title:'';document.getElementById('amount').value=item?item.amount:'';document.getElementById('category').value=item?item.category:'transport';document.getElementById('date').value=item?item.date:defaultDate();if(!dialog.open)dialog.showModal();setTimeout(()=>document.getElementById('title').focus(),80)}
+    function closeEntry(){if(dialog.open)dialog.close();editingId=null;entryError.textContent=''}
+    document.getElementById('addBtn').onclick=()=>openEntry();document.getElementById('addInline').onclick=()=>openEntry();document.getElementById('closeDialog').onclick=closeEntry;document.getElementById('cancelEntry').onclick=closeEntry;dialog.addEventListener('click',e=>{if(e.target===dialog)closeEntry()});
+    entryForm.onsubmit=e=>{e.preventDefault();const wasEditing=editingId!==null,fd=new FormData(e.target),title=String(fd.get('title')||'').trim(),amount=Number(fd.get('amount')),category=String(fd.get('category')||''),date=String(fd.get('date')||'');if(!title||!(amount>0)||!categories[category]||!/^\d{4}-\d{2}-\d{2}$/.test(date)){entryError.textContent='请填写完整的事项、金额、分类和日期';return}const next={id:editingId===null?Date.now():editingId,title,amount,category,date};if(editingId===null)records.push(next);else{const index=records.findIndex(r=>String(r.id)===String(editingId));if(index<0){entryError.textContent='找不到这笔记录，请刷新后重试';return}records[index]=next}persist();render();closeEntry();showToast(wasEditing?'这笔消费已更新':'已经记进旅行账本啦')};
     document.getElementById('filters').onclick=e=>{const b=e.target.closest('[data-filter]');if(!b)return;activeFilter=b.dataset.filter;render()};
-    document.getElementById('recordList').onclick=e=>{const b=e.target.closest('[data-delete]');if(!b)return;records=records.filter(r=>String(r.id)!==b.dataset.delete);persist();render();showToast('这笔记录已删除')};
-    const pop=document.getElementById('budgetPop'); document.getElementById('editBudget').onclick=()=>{document.getElementById('budgetInput').value=budget;pop.classList.toggle('open');document.getElementById('budgetInput').focus()};
-    document.getElementById('saveBudget').onclick=()=>{const v=Number(document.getElementById('budgetInput').value);if(v>0){budget=v;persist();render();pop.classList.remove('open');showToast('总预算已更新')}};
-    const backupDialog=document.getElementById('backupDialog');
-    document.getElementById('openBackup').onclick=()=>backupDialog.showModal();
-    document.getElementById('closeBackup').onclick=()=>backupDialog.close();
-    backupDialog.addEventListener('click',e=>{if(e.target===backupDialog)backupDialog.close()});
-    document.getElementById('exportData').onclick=async()=>{
-      const payload={version:1,exportedAt:new Date().toISOString(),budget,records};
-      const filename=`旅行账本备份-${new Date().toISOString().slice(0,10)}.json`;
-      const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
-      const file=typeof File==='function'?new File([blob],filename,{type:'application/json'}):null;
-      if(file&&navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:'旅行账本备份'}).catch(()=>{})}
-      else{const link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download=filename;link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000)}
-      showToast('备份文件已生成');
-    };
-    document.getElementById('importData').onchange=async e=>{
-      const file=e.target.files?.[0];if(!file)return;
-      try{
-        const data=JSON.parse(await file.text());
-        if(!(Number(data.budget)>0)||!Array.isArray(data.records))throw new Error('invalid');
-        const valid=data.records.every(r=>r&&String(r.title||'').trim()&&Number(r.amount)>0&&categories[r.category]&&/^\d{4}-\d{2}-\d{2}$/.test(r.date||''));
-        if(!valid)throw new Error('invalid');
-        budget=Number(data.budget);records=data.records.map(r=>({id:r.id||Date.now()+Math.random(),title:String(r.title).trim(),amount:Number(r.amount),category:r.category,date:r.date}));
-        persist();render();backupDialog.close();showToast('账单已经恢复');
-      }catch{showToast('这个备份文件无法识别')}finally{e.target.value=''}
-    };
-    function showToast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove('show'),1800)}
-    window.addEventListener('keydown',e=>{if(e.key==='Escape')pop.classList.remove('open')});
+    document.getElementById('recordList').onclick=e=>{const edit=e.target.closest('[data-edit]');if(edit){openEntry(edit.dataset.edit);return}const del=e.target.closest('[data-delete]');if(!del)return;const item=records.find(r=>String(r.id)===del.dataset.delete);if(!item||!window.confirm(`确定删除“${item.title}”吗？`))return;records=records.filter(r=>String(r.id)!==del.dataset.delete);persist();render();showToast('这笔记录已删除')};
+    const budgetDialog=document.getElementById('budgetDialog'),budgetForm=document.getElementById('budgetForm'),budgetError=document.getElementById('budgetError');
+    document.getElementById('editBudget').onclick=()=>{budgetError.textContent='';document.getElementById('budgetInput').value=budget;if(!budgetDialog.open)budgetDialog.showModal();setTimeout(()=>document.getElementById('budgetInput').focus(),80)};
+    function closeBudget(){if(budgetDialog.open)budgetDialog.close();budgetError.textContent=''}
+    document.getElementById('closeBudget').onclick=closeBudget;document.getElementById('cancelBudget').onclick=closeBudget;budgetDialog.addEventListener('click',e=>{if(e.target===budgetDialog)closeBudget()});
+    budgetForm.onsubmit=e=>{e.preventDefault();const value=Number(document.getElementById('budgetInput').value);if(!(value>0)){budgetError.textContent='预算必须大于 0 元';return}budget=value;persist();render();closeBudget();showToast('总预算已更新')};
+    const backupDialog=document.getElementById('backupDialog');document.getElementById('openBackup').onclick=()=>backupDialog.showModal();document.getElementById('closeBackup').onclick=()=>backupDialog.close();backupDialog.addEventListener('click',e=>{if(e.target===backupDialog)backupDialog.close()});
+    document.getElementById('exportData').onclick=async()=>{const payload={version:1,exportedAt:new Date().toISOString(),budget,records};const filename=`旅行账本备份-${new Date().toISOString().slice(0,10)}.json`;const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const file=typeof File==='function'?new File([blob],filename,{type:'application/json'}):null;if(file&&navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:'旅行账本备份'});showToast('备份文件已分享')}catch{showToast('已取消备份')}}else{const link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download=filename;link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000);showToast('备份文件已生成')}};
+    document.getElementById('importData').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const data=JSON.parse(await file.text());if(!(Number(data.budget)>0)||!Array.isArray(data.records))throw new Error('invalid');const cleaned=data.records.map(normalizeRecord);if(cleaned.some(r=>!r))throw new Error('invalid');budget=Number(data.budget);records=cleaned;activeFilter='all';persist();render();backupDialog.close();showToast('账单已经恢复')}catch{showToast('这个备份文件无法识别')}finally{e.target.value=''}};
+    function showToast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove('show'),2000)}
     function registerModelTools(){
       const context=document.modelContext;
       if(!context?.registerTool)return;
