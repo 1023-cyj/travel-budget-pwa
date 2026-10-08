@@ -1,14 +1,14 @@
 {
-  "name": "十一旅行账本",
-  "short_name": "旅行账本",
-  "description": "国庆旅行预算与消费记账",
+  "name": "日常生活账本",
+  "short_name": "日常账本",
+  "description": "把买菜、交通和每个小小奖励都记下来",
   "lang": "zh-CN",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#F0F5FC",
-  "theme_color": "#F0F5FC",
+  "background_color": "#F7F9FD",
+  "theme_color": "#F7F9FD",
   "icons": [
     {
       "src": "./assets/icon-192.png",
